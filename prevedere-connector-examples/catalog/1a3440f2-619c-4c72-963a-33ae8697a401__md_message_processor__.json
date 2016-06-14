@@ -1,0 +1,10 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "outboundProperties": {
+            "query": {}
+        }
+    },
+    "id": "1a3440f2-619c-4c72-963a-33ae8697a401",
+    "version": "5.2.0.0"
+}
