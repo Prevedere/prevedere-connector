@@ -1,0 +1,6 @@
+<!-- BEGIN_INCLUDE(prevedere:testConnection) -->
+    <prevedere:testConnection config-ref="config" echo="test" />
+<!-- END_INCLUDE(prevedere:testConnection) -->
+<!-- BEGIN_INCLUDE(prevedere:getForecastModels) -->
+    <prevedere:getForecastModels config-ref="config" />
+<!-- END_INCLUDE(prevedere:getForecastModels) -->

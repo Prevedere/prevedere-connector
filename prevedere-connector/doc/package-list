@@ -1,0 +1,16 @@
+org.mule.modules.prevedere
+org.mule.modules.prevedere.automation.functional
+org.mule.modules.prevedere.automation.runner
+org.mule.modules.prevedere.client
+org.mule.modules.prevedere.config
+org.mule.modules.prevedere.generated.adapter
+org.mule.modules.prevedere.generated.adapters
+org.mule.modules.prevedere.generated.agents
+org.mule.modules.prevedere.generated.config
+org.mule.modules.prevedere.generated.devkit
+org.mule.modules.prevedere.generated.processors
+org.mule.modules.prevedere.generated.transformers
+org.mule.modules.prevedere.model
+org.mule.modules.prevedere.model.generated.transformers
+org.mule.modules.prevedere.utils
+org.mule.tooling.ui.contribution

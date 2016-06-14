@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:prevedere="http://www.mulesoft.org/schema/mule/prevedere" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/prevedere http://www.mulesoft.org/schema/mule/prevedere/current/mule-prevedere.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <prevedere:config name="Prevedere__Configuration" apiKey="071cf3ed952041a6a0673755988b0b6f" doc:name="Prevedere: Configuration"/>
+    <validation:config name="Validation_Configuration" doc:name="Validation Configuration"/>
+    <flow name="prevedere-connector-testFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/test" doc:name="HTTP"/>
+        <prevedere:test-connection config-ref="Prevedere__Configuration" echo="hello testing testing" doc:name="Prevedere"/>
+        <validation:is-not-null config-ref="Validation_Configuration" value="[#[payload]" doc:name="Validation"/>
+    </flow>
+    <flow name="prevedere-connector-indicators">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/indicators/{query}/" allowedMethods="GET" doc:name="HTTP"/>
+        <prevedere:search-indicators config-ref="Prevedere__Configuration" query="#[message.inboundProperties.'http.uri.params'.query]" frequency="#[message.inboundProperties.'http.query.params'.frequency]" seasonality="#[message.inboundProperties.'http.query.params'.seasonality]" internalOnly="#[message.inboundProperties.'http.query.params'.internal]" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="prevedere-connector-indicator">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/indicator/{provider}/{providerid}" doc:name="HTTP"/>
+        <prevedere:get-indicator-data config-ref="Prevedere__Configuration" provider="#[message.inboundProperties.'http.uri.params'.provider]" providerId="#[message.inboundProperties.'http.uri.params'.providerid]" start="#[message.inboundProperties.'http.query.params'.start]" offset="#[message.inboundProperties.'http.query.params'.offset]" calculation="#[message.inboundProperties.'http.query.params'.calculation]" frequency="#[message.inboundProperties.'http.query.params'.frequency]" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="prevedere-connector-forecastmodels">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/models" doc:name="HTTP"/>
+        <prevedere:get-forecast-models config-ref="Prevedere__Configuration" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="prevedere-connector-model">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/model/{id}" doc:name="HTTP"/>
+        <prevedere:get-forecast-model-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" cutoff="#[message.inboundProperties.'http.query.params'.cutoff]" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="prevedere-connector-rawmodel">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/raw/{id}" doc:name="HTTP"/>
+        <prevedere:get-raw-model-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" cutoff="#[message.inboundProperties.'http.query.params'.cutoff]" useForecastFrequency="#[message.inboundProperties.'http.query.params'.useforecastfrequency]" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+    <flow name="prevedere-connector-model-summary">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/summary/{id}" doc:name="HTTP"/>
+        <prevedere:get-forecast-summary-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" doc:name="Prevedere"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </flow>
+</mule>
