@@ -1,5 +1,10 @@
 package org.mule.modules.prevedere.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Echo {
-	public String Echo;
+	
+	@SerializedName("Echo")
+	public String echo;
+	
 }

@@ -2,12 +2,19 @@ package org.mule.modules.prevedere.model;
 
 import java.util.UUID;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Provider {
-	public String Name;
+	
+	@SerializedName("Values")
+	public String name;
 
-    public String Description;
+	@SerializedName("Values")
+    public String description;
 
-    public UUID Id;
+	@SerializedName("Values")
+    public UUID id;
 
-    public String Source;
+	@SerializedName("Values")
+    public String source;
 }

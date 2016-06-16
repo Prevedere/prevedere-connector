@@ -73,8 +73,8 @@ public class GetIndicatorDataTestCases extends AbstractTestCase<PrevedereConnect
 		
 		assertTrue(result.size() > 1);
 		
-		LocalDate firstDate = result.get(0).Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate nextDate = result.get(1).Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate firstDate = result.get(0).date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate nextDate = result.get(1).date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		
 		assertTrue((nextDate.getYear() - firstDate.getYear()) == 1);
 	}

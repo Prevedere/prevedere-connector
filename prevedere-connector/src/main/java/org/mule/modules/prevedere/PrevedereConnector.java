@@ -1,5 +1,6 @@
 package org.mule.modules.prevedere;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -9,8 +10,6 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.licensing.RequiresEnterpriseLicense;
 import org.mule.api.annotations.param.Optional;
-import org.mule.api.annotations.rest.RestQueryParam;
-import org.mule.api.annotations.rest.RestUriParam;
 import org.mule.modules.prevedere.client.ApiClient;
 import org.mule.modules.prevedere.config.ConnectorConfig;
 import org.mule.modules.prevedere.model.Calculation;
@@ -29,13 +28,12 @@ import org.mule.modules.prevedere.model.Seasonality;
  * @author Prevedere
  *
  */
-@SuppressWarnings("deprecation")
 @RequiresEnterpriseLicense(allowEval = true)
 @Connector(name="prevedere", friendlyName="Prevedere")
 public class PrevedereConnector {
 
 	@Config
-    ConnectorConfig config;
+	ConnectorConfig config;
 
 	/**
 	 * Test the current configuration and API Authorization
@@ -47,10 +45,10 @@ public class PrevedereConnector {
 	 * @throws Exception
 	 */
     @Processor(friendlyName="Test Connection")
-    public String testConnection(@RestUriParam("echo") String echo) throws Exception {
-    	String result = this.config.ApiClient.Test(echo);
+    public String testConnection(String echo) throws Exception {
+    	String result = this.config.getClient().test(echo);
 		
-		if(!ApiClient.IsConnected) {
+    	if(!ApiClient.isConnected()) {
 			throw new Exception("Could not connect to API.");
 		}
 		
@@ -66,7 +64,7 @@ public class PrevedereConnector {
      */
     @Processor(friendlyName="Get Forecast Models")
     public List<ForecastModel> getForecastModels() throws Exception {
-    	return this.config.ApiClient.GetForecastModels();
+    	return this.config.getClient().getForecastModels();
     }
     
     /**
@@ -80,22 +78,23 @@ public class PrevedereConnector {
      * 			optional parameter to filter search results by frequency
      * @param seasonality
      * 			optional parameter to filter search results seasonality
+     * 
      * @return a list a indicators matching the search criteria
      * 
      * @throws Exception
      */
     @Processor(friendlyName="Search Indicators")
-    public List<Indicator> searchIndicators(@RestUriParam("query")String query, @RestQueryParam("internal")@Optional Boolean internalOnly, @RestQueryParam("frequency")@Optional Frequency frequency, @RestQueryParam("seasonality")@Optional Seasonality seasonality) throws Exception {
-		frequency = frequency != null ? frequency : Frequency.Default;
-		seasonality = seasonality != null ? seasonality : Seasonality.Default;
+    public List<Indicator> searchIndicators(String query, @Optional Boolean internalOnly, @Optional Frequency frequency, @Optional Seasonality seasonality) throws Exception {
+		Frequency searchFrequency = frequency != null ? frequency : Frequency.Default;
+		Seasonality searchseasonality = seasonality != null ? seasonality : Seasonality.Default;
     	
-    	SearchResults<Indicator> result = this.config.ApiClient.SearchIndicators(query, frequency, seasonality, internalOnly);
+    	SearchResults<Indicator> result = this.config.getClient().searchIndicators(query, searchFrequency, searchseasonality, internalOnly);
     	
-    	if(result == null || result.TotalResults == 0) {
-    		return null;
+    	if(result == null || result.totalResults == 0) {
+    		return Collections.<Indicator>emptyList();
     	}
     	
-    	return result.Results;
+    	return result.results;
     }
 
     /**
@@ -118,13 +117,11 @@ public class PrevedereConnector {
      * @throws Exception
      */    
     @Processor(friendlyName="Get Indicator Data")
-    public List<Point> getIndicatorData(@RestUriParam("provider") String provider, @RestUriParam("providerId")String providerId, @RestQueryParam("startDate")@Optional Date start, @RestQueryParam("frequency")@Optional Frequency frequency, @RestQueryParam("calculation")@Optional Calculation calculation, @RestQueryParam("offset")@Optional Integer offset) throws Exception {
-    	String hyphenatedProvider =  provider.replaceFirst( "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" );
-    	
+    public List<Point> getIndicatorData(String provider, String providerId, @Optional Date start, @Optional Frequency frequency, @Optional Calculation calculation, @Optional Integer offset) throws Exception {
     	//some stupid java stuff here
-    	offset = offset != null ? offset : new Integer(0);
+    	int indicatorOffset = offset != null ? offset : new Integer(0);
 		
-    	return this.config.ApiClient.GetSeriesData(UUID.fromString(hyphenatedProvider), providerId, start, frequency, calculation, offset);
+    	return this.config.getClient().getSeriesData(getUUID(provider), providerId, start, frequency, calculation, indicatorOffset);
     }
     
     /**
@@ -139,10 +136,8 @@ public class PrevedereConnector {
      * @throws Exception
      */
     @Processor(friendlyName="Get Forecast Model Data")
-    public List<Point> getForecastModelData(@RestUriParam("modelId") String modelId, @RestQueryParam("cutoff")@Optional Date cutoff) throws Exception {
-    	String hyphenatedModelId =  modelId.replaceFirst( "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" );
-    	
-    	return this.config.ApiClient.GetModelForecast(UUID.fromString(hyphenatedModelId), cutoff);
+    public List<Point> getForecastModelData(String modelId, @Optional Date cutoff) throws Exception {
+    	return this.config.getClient().getModelForecast(getUUID(modelId), cutoff);
     }
     
     /**
@@ -159,12 +154,10 @@ public class PrevedereConnector {
      * @throws Exception
      */
     @Processor(friendlyName="Get Raw Model Data")
-    public RawModel getRawModelData(@RestUriParam("modelId") String modelId, @RestQueryParam("useForecastFrequency")@Optional Boolean useForecastFrequency, @RestQueryParam("cutoffDate")@Optional Date cutoff) throws Exception {
-    	String hyphenatedModelId =  modelId.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" );
+    public RawModel getRawModelData(String modelId, @Optional Boolean useForecastFrequency, @Optional Date cutoff) throws Exception {
+    	boolean shouldUseForecastFrequency = useForecastFrequency != null ? useForecastFrequency : false;
     	
-    	useForecastFrequency = useForecastFrequency != null ? useForecastFrequency : false;
-    	
-    	return this.config.ApiClient.GetRawModel(UUID.fromString(hyphenatedModelId), useForecastFrequency, cutoff);
+    	return this.config.getClient().getRawModel(getUUID(modelId), shouldUseForecastFrequency, cutoff);
     }
     
     /**
@@ -176,10 +169,8 @@ public class PrevedereConnector {
      * @throws Exception
      */
     @Processor(friendlyName="Get Forecast Summary Data")
-    public ForecastResult getForecastSummaryData(@RestUriParam("modelId") String modelId) throws Exception {
-    	String hyphenatedModelId =  modelId.replaceFirst( "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" );
-    	
-    	return this.config.ApiClient.GetForecastSummary(UUID.fromString(hyphenatedModelId));
+    public ForecastResult getForecastSummaryData(String modelId) throws Exception {
+    	return this.config.getClient().getForecastSummary(getUUID(modelId));
     }
     
     public ConnectorConfig getConfig() {
@@ -190,4 +181,8 @@ public class PrevedereConnector {
         this.config = config;
     }
 
+    private static UUID getUUID(String id) {
+    	return UUID.fromString(id.replaceFirst( "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5" ));
+    }
+    
 }

@@ -63,7 +63,7 @@ public class SearchIndicatorsTestCases extends AbstractTestCase<PrevedereConnect
 		assertTrue(result.size() > 0);
 		
 		for (int index = 0; index < result.size(); index++) {
-			assertTrue(result.get(index).Frequency == frequency);
+			assertTrue(result.get(index).frequency == frequency);
 		}
 	}
 
@@ -79,7 +79,7 @@ public class SearchIndicatorsTestCases extends AbstractTestCase<PrevedereConnect
 		assertTrue(result.size() > 0);
 		
 		for (int index = 0; index < result.size(); index++) {
-			assertTrue(result.get(index).Seasonality == seasonality);
+			assertTrue(result.get(index).seasonality == seasonality);
 		}
 	}
 }
