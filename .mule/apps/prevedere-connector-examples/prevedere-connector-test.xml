@@ -13,10 +13,15 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
     <prevedere:config name="Prevedere__Configuration" apiKey="071cf3ed952041a6a0673755988b0b6f" doc:name="Prevedere: Configuration"/>
     <validation:config name="Validation_Configuration" doc:name="Validation Configuration"/>
+    <prevedere:config name="Prevedere_Configuration_Bad" apiKey="123456789" doc:name="Prevedere: Configuration"/>
     <flow name="prevedere-connector-testFlow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/test" doc:name="HTTP"/>
-        <prevedere:test-connection config-ref="Prevedere__Configuration" echo="hello testing testing" doc:name="Prevedere"/>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/test/{echo}" doc:name="HTTP"/>
+        <prevedere:test-connection config-ref="Prevedere_Configuration_Bad" echo="#[message.inboundProperties.'http.uri.params'.echo]" doc:name="Prevedere"/>
         <validation:is-not-null config-ref="Validation_Configuration" value="[#[payload]" doc:name="Validation"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+       		<set-payload value="The request cannot be processed, the error is #[exception.getCause()]"/>
+            <set-property propertyName="http.status" value="500"/>
+        </catch-exception-strategy>
     </flow>
     <flow name="prevedere-connector-indicators">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/indicators/{query}/" allowedMethods="GET" doc:name="HTTP"/>
