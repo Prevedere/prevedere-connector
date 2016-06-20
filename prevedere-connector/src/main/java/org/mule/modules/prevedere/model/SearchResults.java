@@ -3,18 +3,24 @@ package org.mule.modules.prevedere.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SearchResults<TResult> {
 	
 	public SearchResults()
     {
-        Results = new ArrayList<TResult>();
+        this.results = new ArrayList<TResult>();
     }
 
-    public int Page;
+	@SerializedName("Page")
+    public int page;
 
-    public int PageSize;
+	@SerializedName("PageSize")
+    public int pageSize;
 
-    public long TotalResults;
+	@SerializedName("TotalResults")
+    public long totalResults;
 
-    public List<TResult> Results;
+	@SerializedName("Results")
+    public List<TResult> results;
 }

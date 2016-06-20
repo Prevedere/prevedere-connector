@@ -4,47 +4,68 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Indicator {
 	
 	public Indicator(){
-		Tags = new ArrayList<String>();
+		this.tags = new ArrayList<String>();
 	}
 	
-	public String Aggregate;
+	@SerializedName("Aggregate")
+	public String aggregate;
 
-    public String Color;
+	@SerializedName("Color")
+    public String color;
 
-    public int Count;
+	@SerializedName("Count")
+    public int count;
 
-    public Date Created;
+	@SerializedName("Created")
+    public Date created;
+	
+	@SerializedName("Description")
+    public String description;
 
-    public String Description;
+	@SerializedName("EndTime")
+    public Date endTime;
 
-    public Date EndTime;
+	@SerializedName("Frequency")
+    public Frequency frequency;
 
-    public Frequency Frequency;
+	@SerializedName("Deprecated")
+    public boolean deprecated;
 
-    public boolean Deprecated;
+	@SerializedName("LastModified")
+    public Date lastModified;
 
-    public Date LastModified;
+	@SerializedName("Name")
+    public String name;
 
-    public String Name;
+	@SerializedName("Notes")
+    public String notes;
 
-    public String Notes;
+	@SerializedName("Provider")
+    public Provider provider;
 
-    public Provider Provider;
+	@SerializedName("ProviderId")
+    public String providerId;
+	
+	@SerializedName("Seasonality")
+    public Seasonality seasonality;
 
-    public String ProviderId;
+	@SerializedName("Source")
+    public String source;
 
-    public Seasonality Seasonality;
+    @SerializedName("StartTime")
+    public Date startTime;
 
-    public String Source;
+    @SerializedName("Tags")
+    public List<String> tags;
 
-    public Date StartTime;
+    @SerializedName("Type")
+    public String type;
 
-    public List<String> Tags;
-
-    public String Type;
-
-    public String Units;
+    @SerializedName("Units")
+    public String units;
 }

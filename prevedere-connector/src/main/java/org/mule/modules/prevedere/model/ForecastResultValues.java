@@ -3,21 +3,29 @@ package org.mule.modules.prevedere.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastResultValues {
 	public ForecastResultValues()
     {
-        Values = new ArrayList<Point>();
+        this.values = new ArrayList<Point>();
     }
 
-    public List<Point> Values;
+	@SerializedName("Values")
+    public List<Point> values;
 
-    public int LeadTime;
+	@SerializedName("LeadTime")
+    public int leadTime;
 
-    public double DirectionalAccuracy;
+	@SerializedName("DirectionalAccuracy")
+    public double directionalAccuracy;
 
-    public double Accuracy;
+	@SerializedName("Accuracy")
+    public double accuracy;
 
-    public double Sum;
+	@SerializedName("Sum")
+    public double sum;
 
-    public double Mape;
+	@SerializedName("Mape")
+    public double mape;
 }

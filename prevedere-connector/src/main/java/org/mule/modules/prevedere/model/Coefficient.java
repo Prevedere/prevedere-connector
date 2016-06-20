@@ -4,43 +4,52 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Coefficient {
 
 	public Coefficient()
     {
-        Confidence95 = "";
-        Type = "";
-        IndicatorName = "";
-        Dates = new ArrayList<Date>();
+        this.confidence95 = "";
+        this.type = "";
+        this.indicatorName = "";
+        this.dates = new ArrayList<Date>();
     }
 
     public Coefficient(String type, double value, double error, double tValue, String confidence)
     {
-        Value = value;
-        StandardError = error;
-        TValue = tValue;
-        Confidence95 = confidence;
-        Type = type;
-        IndicatorName = "";
-        Dates = new ArrayList<Date>();
+        this.value = value;
+        this.standardError = error;
+        this.tValue = tValue;
+        this.confidence95 = confidence;
+        this.type = type;
+        this.indicatorName = "";
+        this.dates = new ArrayList<Date>();
     }
 
-    public double Value;
+    @SerializedName("Value")
+    public double value;
 
-    public double StandardError;
+    @SerializedName("StandardError")
+    public double standardError;
 
-    public double TValue;
+    @SerializedName("TValue")
+    public double tValue;
 
-    public String Confidence95;
+    @SerializedName("Confidence95")
+    public String confidence95;
 
-    public String Type;
+    @SerializedName("Type")
+    public String type;
 
-    public String IndicatorName;
+    @SerializedName("IndicatorName")
+    public String indicatorName;
 
-    public List<Date> Dates;
+    @SerializedName("Dates")
+    public List<Date> dates;
 
-    public String ToString()
+    public String toString()
     {
-        return "Value: " + Value + " Std Err:" + StandardError + " T:" + TValue + " 95%:" + Confidence95;
+        return "Value: " + this.value + " Std Err:" + this.standardError + " T:" + this.tValue + " 95%:" + this.confidence95;
     }
 }

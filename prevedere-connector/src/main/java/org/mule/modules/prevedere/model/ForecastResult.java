@@ -1,9 +1,15 @@
 package org.mule.modules.prevedere.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastResult {
-	public ForecastResultValues High;
+	
+	@SerializedName("High")
+	public ForecastResultValues high;
 
-    public ForecastResultValues Average;
+	@SerializedName("Average")
+    public ForecastResultValues average;
 
-    public ForecastResultValues Low;
+	@SerializedName("Low")
+    public ForecastResultValues low;
 }

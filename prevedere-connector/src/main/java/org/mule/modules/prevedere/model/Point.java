@@ -2,8 +2,13 @@ package org.mule.modules.prevedere.model;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Point {
-	public double Value;
 	
-    public Date Date;
+	@SerializedName("Value")
+	public double value;
+	
+	@SerializedName("Date")
+    public Date date;
 }

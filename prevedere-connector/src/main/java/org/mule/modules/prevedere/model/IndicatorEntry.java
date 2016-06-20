@@ -3,15 +3,20 @@ package org.mule.modules.prevedere.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class IndicatorEntry {
 	
 	public IndicatorEntry() {
-		Values = new ArrayList<Point>();
+		this.values = new ArrayList<Point>();
 	}
 	
-	public Indicator Indicator;
+	@SerializedName("Indicator")
+	public Indicator indicator;
 
-    public int Offset;
+	@SerializedName("Offset")
+    public int offset;
 
-    public List<Point> Values; 
+	@SerializedName("Values")
+    public List<Point> values; 
 }

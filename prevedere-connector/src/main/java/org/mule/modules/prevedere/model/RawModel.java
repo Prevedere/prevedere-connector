@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RawModel {
 
     public RawModel()
     {
-        this.Indicators = new ArrayList<IndicatorEntry>();
-        this.Coefficients = new ArrayList<List<Coefficient>>();
+        this.indicators = new ArrayList<IndicatorEntry>();
+        this.coefficients = new ArrayList<List<Coefficient>>();
     }
     
-	public List<IndicatorEntry> Indicators;
+    @SerializedName("Values")
+	public List<IndicatorEntry> indicators;
 
-    public List<List<Coefficient>> Coefficients;
+    @SerializedName("Values")
+    public List<List<Coefficient>> coefficients;
 
-    public Date StartDate;
+    @SerializedName("Values")
+    public Date startDate;
 }

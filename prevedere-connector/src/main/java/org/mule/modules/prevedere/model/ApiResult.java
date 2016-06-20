@@ -1,14 +1,15 @@
 package org.mule.modules.prevedere.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ApiResult {
 
-	public String JsonResult;
+	@SerializedName("JsonResult")
+	public String jsonResult;
 
-    public boolean Success;
+	@SerializedName("Success")
+    public boolean success;
 
-    public String ErrorMessage;
-
-    //This probably will not work coming from .NET
-    //public Exception ErrorDetails;
-    
+	@SerializedName("ErrorMessage")
+    public String errorMessage;    
 }

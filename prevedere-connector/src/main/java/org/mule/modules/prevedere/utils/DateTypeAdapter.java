@@ -10,7 +10,6 @@ import org.joda.time.format.ISODateTimeFormat;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 public class DateTypeAdapter implements JsonDeserializer<Date> {
 
@@ -18,7 +17,7 @@ public class DateTypeAdapter implements JsonDeserializer<Date> {
 	static final org.joda.time.format.DateTimeFormatter DATE_TIME_FORMATTER = ISODateTimeFormat.dateTime();
 
 	@Override
-	public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+	public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) {
 		String jsonElement = json.getAsString();
 		
 		if(jsonElement.length() == 0) {

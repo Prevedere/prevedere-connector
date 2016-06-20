@@ -3,24 +3,37 @@ package org.mule.modules.prevedere.model;
 import java.util.Date;
 import java.util.UUID;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastModel {
-	public UUID Id;
+	
+	@SerializedName("Id")
+	public UUID id;
 
-    public int ForecastMonths;
+	@SerializedName("ForecastMonths")
+    public int forecastMonths;
 
-    public String Name;
+	@SerializedName("Name")
+    public String name;
 
-    public String Owner;
+	@SerializedName("Owner")
+    public String owner;
 
-    public Date Created;
+	@SerializedName("Created")
+    public Date created;
 
-    public Date LastModified;
+	@SerializedName("LastModified")
+    public Date lastModified;
 
-    public ForecastModelType Type;
+	@SerializedName("Type")
+    public ForecastModelType type;
 
-    public Frequency Frequency;
+	@SerializedName("Frequency")
+    public Frequency frequency;
 
-    public Frequency OutputFrequency;
+	@SerializedName("OutputFrequency")
+    public Frequency outputFrequency;
 
-    public Indicator Indicator;
+	@SerializedName("Indicator")
+    public Indicator indicator;
 }
