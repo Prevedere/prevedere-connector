@@ -1,1 +1,0 @@
-goto prevedere-connector-example project
