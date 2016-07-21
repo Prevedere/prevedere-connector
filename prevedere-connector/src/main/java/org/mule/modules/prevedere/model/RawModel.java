@@ -14,12 +14,12 @@ public class RawModel {
         this.coefficients = new ArrayList<List<Coefficient>>();
     }
     
-    @SerializedName("Values")
+    @SerializedName("Indicators")
 	public List<IndicatorEntry> indicators;
 
-    @SerializedName("Values")
+    @SerializedName("Coefficients")
     public List<List<Coefficient>> coefficients;
 
-    @SerializedName("Values")
+    @SerializedName("StartDate")
     public Date startDate;
 }

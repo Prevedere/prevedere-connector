@@ -6,15 +6,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class Provider {
 	
-	@SerializedName("Values")
+	@SerializedName("Name")
 	public String name;
 
-	@SerializedName("Values")
+	@SerializedName("Description")
     public String description;
 
-	@SerializedName("Values")
+	@SerializedName("Id")
     public UUID id;
 
-	@SerializedName("Values")
+	@SerializedName("Source")
     public String source;
 }

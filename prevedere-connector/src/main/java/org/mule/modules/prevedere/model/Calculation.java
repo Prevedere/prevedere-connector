@@ -13,7 +13,9 @@ public enum Calculation {
     
     FivePeriodMoving(5),
     
-    ThreePeriodYearOverYear(6);
+    ThreePeriodYearOverYear(6),
+    
+    ThreePeriodMovingPeriodOverPeriod(7);
     
     private int value;    
 

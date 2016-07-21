@@ -12,9 +12,15 @@ public class Indicator {
 		this.tags = new ArrayList<String>();
 	}
 	
+	@SerializedName("Accessibility")
+	public ProviderAcces accesssibility;
+	
 	@SerializedName("Aggregate")
 	public String aggregate;
 
+	@SerializedName("Calculation")
+	public Calculation calculation;
+	
 	@SerializedName("Color")
     public String color;
 
