@@ -1,13 +1,9 @@
 # Prevedere Anypoint Connector
 
-[Connector description including destination service or application with]
-
 # Mule supported versions
-Examples:
 Mule 3.8.x
 
 #Service or application supported modules
-Example:
 Prevedere API v1.0.0
 
 
