@@ -2,6 +2,7 @@ package org.mule.modules.prevedere.config;
 
 import org.mule.api.annotations.components.Configuration;
 import org.mule.api.annotations.display.FriendlyName;
+import org.mule.api.annotations.param.Default;
 import org.mule.modules.prevedere.client.ApiClient;
 import org.mule.api.annotations.Configurable;
 
@@ -13,9 +14,10 @@ public class ConnectorConfig {
      */
     @Configurable
     @FriendlyName("API Key")
+    @Default("071cf3ed952041a6a0673755988b0b6f")
     private String apiKey;
 
-    private static final ApiClient apiClient = new ApiClient("071cf3ed952041a6a0673755988b0b6f");
+    private static final ApiClient apiClient = new ApiClient();
     
     /**
      * Set API Key

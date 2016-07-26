@@ -27,18 +27,31 @@ public class ApiClient {
 
 	protected static OkHttpClient Client = new OkHttpClient();
 
+	private static String DefaultApiUrlBase = "https://api.prevedere.com";
 	protected static String ApiUrlBase = "https://api.prevedere.com";
 
+	private static String DefaultApiKey = "071cf3ed952041a6a0673755988b0b6f";
 	protected static String ApiKey;
 
-	protected static boolean IsConnected;
+	protected static Context Context;
 
 	public static void setApiKey(String value) {
-		ApiClient.IsConnected = false;
+		ApiClient.Context = null;
 		ApiClient.ApiKey = value;
 	}
 
-	public ApiClient(String apiKey) {
+	public ApiClient() {
+		ApiUrlBase = DefaultApiUrlBase;
+		ApiKey = DefaultApiKey;
+	}
+	
+	public ApiClient(String baseUrl) {
+		ApiUrlBase = baseUrl;
+		ApiKey = DefaultApiKey;
+	}
+	
+	public ApiClient(String baseUrl, String apiKey) {
+		ApiUrlBase = baseUrl;
 		ApiKey = apiKey;
 	}
 
@@ -53,11 +66,11 @@ public class ApiClient {
 	}
 
 	public static boolean isConnected() {
-		return ApiClient.IsConnected;
+		return ApiClient.Context != null;
 	}
 
 	public static void disconnect() {
-		ApiClient.IsConnected = false;
+		ApiClient.Context = null;
 	}
 
 	public SearchResults<Indicator> searchIndicators(String query) throws Exception {
@@ -149,12 +162,11 @@ public class ApiClient {
 	}
 
 	private void assertConnected() throws Exception {
-		if (ApiClient.IsConnected) {
+		if (ApiClient.Context != null) {
 			return;
 		}
 
 		if (connect()) {
-			ApiClient.IsConnected = true;
 			return;
 		}
 
@@ -162,11 +174,11 @@ public class ApiClient {
 	}
 
 	private boolean connect() throws Exception {
-		URI url = ApiUrls.echoUrl("connect");
+		URI url = ApiUrls.contextUrl();
 
-		Echo result = executeRequest(url, Echo.class);
+		ApiClient.Context = executeRequest(url, Context.class);
 
-		return result != null;
+		return ApiClient.Context != null;
 	}
 
 	private <TResponse> TResponse executeRequest(URI url, Type responseClass) throws IOException {
@@ -185,6 +197,10 @@ public class ApiClient {
 	private static class ApiUrls {
 		private ApiUrls() {
 			
+		}
+		
+		public static URI contextUrl() throws MalformedURLException, URISyntaxException {
+			return ApiUrls.getURI(ApiUrlBase + "/context?apikey=" + ApiClient.ApiKey);	
 		}
 		
 		public static URI echoUrl(String echo) throws MalformedURLException, URISyntaxException {
