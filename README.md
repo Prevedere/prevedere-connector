@@ -14,8 +14,8 @@ For released connectors you can download them from the update site in Anypoint S
 Open Anypoint Studio, go to Help → Install New Software and select Anypoint Connectors Update Site where you’ll find all avaliable connectors.
 
 #Usage
-For information about usage our documentation at https://github.com/Prevedere/MuleSoft-Connector
+For information about usage our documentation at https://github.com/Prevedere/Prevedere-Connector
 
 # Reporting Issues
 
-We use GitHub:Issues for tracking issues with this connector. You can report new issues at this link https://github.com/Prevedere/MuleSoft-Connector/issues.
+We use GitHub:Issues for tracking issues with this connector. You can report new issues at this link https://github.com/Prevedere/Prevedere-Connector/issues.
