@@ -96,7 +96,7 @@
 			<plugin>
 				<groupId>org.mule.certification</groupId>
 				<artifactId>project-structure-validation</artifactId>
-				<version>1.0.5</version>
+				<version>1.0.6</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
