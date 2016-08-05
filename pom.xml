@@ -19,8 +19,11 @@
 		<category>Certified</category>
 		<licensePath>LICENSE.md</licensePath>
 		<devkit.studio.package.skip>false</devkit.studio.package.skip>
+		<mule.version>3.8.0</mule.version>
 		<munit.version>1.2.0</munit.version>
 		<mule.munit.support.version>${mule.version}</mule.munit.support.version>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 
 	<distributionManagement>
@@ -66,6 +69,11 @@
 			<artifactId>gson</artifactId>
 			<version>2.6.2</version>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9.4</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -100,5 +108,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

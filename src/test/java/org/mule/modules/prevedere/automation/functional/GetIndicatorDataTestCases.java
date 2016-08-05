@@ -10,8 +10,6 @@ package org.mule.modules.prevedere.automation.functional;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -81,8 +79,8 @@ public class GetIndicatorDataTestCases extends AbstractTestCase<PrevedereConnect
 		
 		assertTrue(result.size() > 1);
 		
-		LocalDate firstDate = result.get(0).date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate nextDate = result.get(1).date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		org.joda.time.LocalDate firstDate = new org.joda.time.LocalDate(result.get(0).date);
+		org.joda.time.LocalDate nextDate = new org.joda.time.LocalDate(result.get(1).date);
 		
 		assertTrue((nextDate.getYear() - firstDate.getYear()) == 1);
 	}
