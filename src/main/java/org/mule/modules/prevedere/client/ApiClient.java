@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.mule.modules.prevedere.model.*;
 import org.mule.modules.prevedere.utils.DateTypeAdapter;
@@ -33,7 +34,11 @@ import okhttp3.Response;
 
 public class ApiClient {
 
-	protected static OkHttpClient Client = new OkHttpClient();
+	protected static OkHttpClient Client = new OkHttpClient.Builder()
+			.connectTimeout(30, TimeUnit.SECONDS)
+			.readTimeout(30, TimeUnit.SECONDS)
+	        .writeTimeout(30, TimeUnit.SECONDS)
+	        .build();
 
 	private static String DefaultApiUrlBase = "https://api.prevedere.com";
 	protected static String ApiUrlBase = "https://api.prevedere.com";

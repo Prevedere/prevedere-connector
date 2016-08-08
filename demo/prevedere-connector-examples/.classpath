@@ -29,5 +29,6 @@
   <classpathentry kind="var" path="M2_REPO/com/squareup/okhttp3/okhttp/3.3.1/okhttp-3.3.1.jar" sourcepath="M2_REPO/com/squareup/okhttp3/okhttp/3.3.1/okhttp-3.3.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/squareup/okio/okio/1.8.0/okio-1.8.0.jar" sourcepath="M2_REPO/com/squareup/okio/okio/1.8.0/okio-1.8.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/prevedere-connector/1.0.0-SNAPSHOT/prevedere-connector-1.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/mule/modules/prevedere-connector/1.0.0-SNAPSHOT/prevedere-connector-1.0.0-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mule/modules/prevedere-java-connector/1.0.0-SNAPSHOT/prevedere-java-connector-1.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/mule/modules/prevedere-java-connector/1.0.0-SNAPSHOT/prevedere-java-connector-1.0.0-SNAPSHOT-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/sshd/sshd-core/1.0.0/sshd-core-1.0.0.jar" sourcepath="M2_REPO/org/apache/sshd/sshd-core/1.0.0/sshd-core-1.0.0-sources.jar"/>
 </classpath>

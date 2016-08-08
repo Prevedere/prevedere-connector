@@ -11,9 +11,9 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
-    <prevedere:config name="Prevedere__Configuration" apiKey="071cf3ed952041a6a0673755988b0b6f" doc:name="Prevedere: Configuration"/>
     <validation:config name="Validation_Configuration" doc:name="Validation Configuration"/>
     <prevedere:config name="Prevedere_Configuration_Bad" apiKey="123456789" doc:name="Prevedere: Configuration"/>
+    <prevedere:config name="Prevedere__Configuration" apiKey="071cf3ed952041a6a0673755988b0b6f" doc:name="Prevedere: Configuration"/>
     <flow name="prevedere-connector-testFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/test/{echo}" doc:name="HTTP"/>
         <prevedere:test-connection config-ref="Prevedere__Configuration" echo="#[message.inboundProperties.'http.uri.params'.echo]" doc:name="Prevedere"/>
