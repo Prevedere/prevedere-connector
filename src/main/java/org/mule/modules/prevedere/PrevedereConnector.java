@@ -18,7 +18,6 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.licensing.RequiresEnterpriseLicense;
 import org.mule.api.annotations.param.Optional;
-import org.mule.modules.prevedere.client.ApiClient;
 import org.mule.modules.prevedere.config.ConnectorConfig;
 import org.mule.modules.prevedere.model.Calculation;
 import org.mule.modules.prevedere.model.ForecastModel;
