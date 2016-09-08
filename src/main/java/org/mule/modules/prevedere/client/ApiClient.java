@@ -41,7 +41,7 @@ public class ApiClient {
 	        .build();
 
 	private static String DefaultApiUrlBase = "https://api.prevedere.com";
-	protected static String ApiUrlBase = "https://api.prevedere.com";
+	protected static String ApiUrlBase;
 
 	private static String DefaultApiKey = "071cf3ed952041a6a0673755988b0b6f";
 	protected static String ApiKey;

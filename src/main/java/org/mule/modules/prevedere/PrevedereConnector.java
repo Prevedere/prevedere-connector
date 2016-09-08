@@ -51,6 +51,7 @@ public class PrevedereConnector {
 	 * @return Echo: {echo} 
 	 * 
 	 * @throws Exception
+	 * 			if API key is invalid
 	 */
     @Processor(friendlyName="Test Connection")
     public String testConnection(String echo) throws Exception {
@@ -69,7 +70,8 @@ public class PrevedereConnector {
      * @return a list of all Forecast Models
      * 
      * @throws Exception
-     */
+     * 			if API key is invalid
+	 */
     @Processor(friendlyName="Get Forecast Models")
     public List<ForecastModel> getForecastModels() throws Exception {
     	return this.config.getClient().getForecastModels();
@@ -90,7 +92,8 @@ public class PrevedereConnector {
      * @return a list a indicators matching the search criteria
      * 
      * @throws Exception
-     */
+     * 			if API key is invalid
+	 */
     @Processor(friendlyName="Search Indicators")
     public List<Indicator> searchIndicators(String query, @Optional Boolean internalOnly, @Optional Frequency frequency, @Optional Seasonality seasonality) throws Exception {
 		Frequency searchFrequency = frequency != null ? frequency : Frequency.Default;
@@ -123,7 +126,8 @@ public class PrevedereConnector {
      * @return a list of date and double pairs
      * 
      * @throws Exception
-     */    
+     * 			if API key is invalid
+	 */    
     @Processor(friendlyName="Get Indicator Data")
     public List<Point> getIndicatorData(String provider, String providerId, @Optional Date start, @Optional Frequency frequency, @Optional Calculation calculation, @Optional Integer offset) throws Exception {
     	//some stupid java stuff here
@@ -142,7 +146,8 @@ public class PrevedereConnector {
      * @return a list of date and double pairs
      * 
      * @throws Exception
-     */
+     * 			if API key is invalid
+	 */
     @Processor(friendlyName="Get Forecast Model Data")
     public List<Point> getForecastModelData(String modelId, @Optional Date cutoff) throws Exception {
     	return this.config.getClient().getModelForecast(getUUID(modelId), cutoff);
@@ -160,7 +165,8 @@ public class PrevedereConnector {
      * @return a RawModel object containing a list of component indicator information and list of segmented statistical information
      * 
      * @throws Exception
-     */
+     * 			if API key is invalid
+	 */
     @Processor(friendlyName="Get Raw Model Data")
     public RawModel getRawModelData(String modelId, @Optional Boolean useForecastFrequency, @Optional Date cutoff) throws Exception {
     	boolean shouldUseForecastFrequency = useForecastFrequency != null ? useForecastFrequency : false;
@@ -175,7 +181,8 @@ public class PrevedereConnector {
      * 			the UUID of the forecast model
      * @return forecast result values for high, average and low forecasts
      * @throws Exception
-     */
+     * 			if API key is invalid
+	 */
     @Processor(friendlyName="Get Forecast Summary Data")
     public ForecastResult getForecastSummaryData(String modelId) throws Exception {
     	return this.config.getClient().getForecastSummary(getUUID(modelId));
