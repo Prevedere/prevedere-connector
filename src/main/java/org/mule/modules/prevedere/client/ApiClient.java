@@ -40,17 +40,17 @@ public class ApiClient {
 	        .writeTimeout(30, TimeUnit.SECONDS)
 	        .build();
 
-	private static String DefaultApiUrlBase = "https://api.prevedere.com";
+	private static final String DefaultApiUrlBase = "https://api.prevedere.com";
 	protected static String ApiUrlBase;
 
-	private static String DefaultApiKey = "071cf3ed952041a6a0673755988b0b6f";
-	protected static String ApiKey;
+	private static final String DefaultApiKey = "071cf3ed952041a6a0673755988b0b6f";
+	protected String ApiKey;
 
-	protected static Context Context;
+	protected Context Context;
 
-	public static void setApiKey(String value) {
-		ApiClient.Context = null;
-		ApiClient.ApiKey = value;
+	public void setApiKey(String value) {
+		this.Context = null;
+		this.ApiKey = value;
 	}
 
 	public ApiClient() {
@@ -71,19 +71,19 @@ public class ApiClient {
 	public String test(String echo) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.echoUrl(echo);
+		URI url = ApiUrls.echoUrl(echo, this.ApiKey);
 
 		Echo result = executeRequest(url, Echo.class);
 
 		return result.echo;
 	}
 
-	public static boolean isConnected() {
-		return ApiClient.Context != null;
+	public boolean isConnected() {
+		return this.Context != null;
 	}
 
-	public static void disconnect() {
-		ApiClient.Context = null;
+	public void disconnect() {
+		this.Context = null;
 	}
 
 	public SearchResults<Indicator> searchIndicators(String query) throws Exception {
@@ -104,7 +104,7 @@ public class ApiClient {
 		int searchPage = page != null ? page : 0;
 		int searchPageSize = pageSize != null ? pageSize : 50;
 
-		URI url = ApiUrls.searchUrl(query, frequency, seasonality, searchInternalOnly, searchIncludeForecasted, searchPage, searchPageSize);
+		URI url = ApiUrls.searchUrl(query, frequency, seasonality, searchInternalOnly, searchIncludeForecasted, searchPage, searchPageSize, this.ApiKey);
 
 		return executeRequest(url, new TypeToken<SearchResults<Indicator>>() {}.getType());
 	}
@@ -112,7 +112,7 @@ public class ApiClient {
 	public List<ForecastModel> getForecastModels() throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.forcastModelsUrl();
+		URI url = ApiUrls.forcastModelsUrl(this.ApiKey);
 
 		return executeRequest(url, new TypeToken<List<ForecastModel>>() {}.getType());
 	}
@@ -124,7 +124,7 @@ public class ApiClient {
 	public List<Point> getModelForecast(UUID modelId, Date cutoffDate) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.forecastModelDataUrl(modelId, cutoffDate);
+		URI url = ApiUrls.forecastModelDataUrl(modelId, cutoffDate, this.ApiKey);
 
 		return executeRequest(url, new TypeToken<List<Point>>() {}.getType());	
 	}
@@ -136,7 +136,7 @@ public class ApiClient {
 	public ForecastResult getForecastSummary(UUID modelId) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.forecastSummaryUrl(modelId);
+		URI url = ApiUrls.forecastSummaryUrl(modelId, this.ApiKey);
 
 		return executeRequest(url, ForecastResult.class);
 	}
@@ -144,7 +144,7 @@ public class ApiClient {
 	public RawModel getRawModel(UUID modelId, boolean useForecastFrequency, Date cutoffDate) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.rawModelDataUrl(modelId, useForecastFrequency, cutoffDate);
+		URI url = ApiUrls.rawModelDataUrl(modelId, useForecastFrequency, cutoffDate, this.ApiKey);
 
 		return executeRequest(url, RawModel.class);
 	}
@@ -156,7 +156,7 @@ public class ApiClient {
 	public List<Point> getSeriesData(UUID provider, String providerId, Frequency frequency) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.seriesUrl(provider, providerId, frequency);
+		URI url = ApiUrls.seriesUrl(provider, providerId, frequency, this.ApiKey);
 
 		return executeRequest(url, new TypeToken<List<Point>>() {}.getType());	
 	}
@@ -169,13 +169,13 @@ public class ApiClient {
 			Calculation calculation, int offset) throws Exception {
 		this.assertConnected();
 
-		URI url = ApiUrls.seriesUrl(provider, providerId, startTime, frequency, calculation, offset);
+		URI url = ApiUrls.seriesUrl(provider, providerId, startTime, frequency, calculation, offset, this.ApiKey);
 
 		return executeRequest(url, new TypeToken<List<Point>>() {}.getType());
 	}
 
 	private void assertConnected() throws Exception {
-		if (ApiClient.Context != null) {
+		if (this.Context != null) {
 			return;
 		}
 
@@ -183,15 +183,15 @@ public class ApiClient {
 			return;
 		}
 
-		throw new Exception("Could not connect with API Key " + ApiClient.ApiKey);
+		throw new Exception("Could not connect with API Key " + this.ApiKey);
 	}
 
 	private boolean connect() throws Exception {
-		URI url = ApiUrls.contextUrl();
+		URI url = ApiUrls.contextUrl(this.ApiKey);
 
-		ApiClient.Context = executeRequest(url, Context.class);
+		this.Context = executeRequest(url, Context.class);
 
-		return ApiClient.Context != null;
+		return this.Context != null;
 	}
 
 	private <TResponse> TResponse executeRequest(URI url, Type responseClass) throws IOException {
@@ -212,22 +212,22 @@ public class ApiClient {
 			
 		}
 		
-		public static URI contextUrl() throws MalformedURLException, URISyntaxException {
-			return ApiUrls.getURI(ApiUrlBase + "/context?apikey=" + ApiClient.ApiKey);	
+		public static URI contextUrl(String apiKey) throws MalformedURLException, URISyntaxException {
+			return ApiUrls.getURI(ApiUrlBase + "/context?apikey=" + apiKey);	
 		}
 		
-		public static URI echoUrl(String echo) throws MalformedURLException, URISyntaxException {
-			return ApiUrls.getURI(ApiUrlBase + "/test/" + echo + "?apikey=" + ApiClient.ApiKey);
+		public static URI echoUrl(String echo, String apiKey) throws MalformedURLException, URISyntaxException {
+			return ApiUrls.getURI(ApiUrlBase + "/test/" + echo + "?apikey=" + apiKey);
 		}
 
-		public static URI forcastModelsUrl() throws MalformedURLException, URISyntaxException {
-			return ApiUrls.getURI(ApiUrlBase + "/forecastmodels?apikey=" + ApiClient.ApiKey);
+		public static URI forcastModelsUrl(String apiKey) throws MalformedURLException, URISyntaxException {
+			return ApiUrls.getURI(ApiUrlBase + "/forecastmodels?apikey=" + apiKey);
 		}
 
-		public static URI rawModelDataUrl(UUID modelId, boolean useForecastFrequency, Date cutoffDate)
+		public static URI rawModelDataUrl(UUID modelId, boolean useForecastFrequency, Date cutoffDate, String apiKey)
 				throws MalformedURLException, URISyntaxException {
 			String url = ApiUrlBase + "/rawModel/" + modelId.toString().replace("-", "") + "/" + useForecastFrequency
-					+ "?apikey=" + ApiClient.ApiKey;
+					+ "?apikey=" + apiKey;
 
 			if (cutoffDate != null) {
 				url += "&AsOfDate=" + new SimpleDateFormat("yyyy-MM-dd").format(cutoffDate);
@@ -237,15 +237,15 @@ public class ApiClient {
 		}
 
 		@SuppressWarnings("unused")
-		public static URI forecastModelDataUrl(ForecastModel model, Date cutoffDate)
+		public static URI forecastModelDataUrl(ForecastModel model, Date cutoffDate, String apiKey)
 				throws MalformedURLException, URISyntaxException {
-			return ApiUrls.forecastModelDataUrl(model.id, cutoffDate);
+			return ApiUrls.forecastModelDataUrl(model.id, cutoffDate, apiKey);
 		}
 
-		public static URI forecastModelDataUrl(UUID modelId, Date cutoffDate)
+		public static URI forecastModelDataUrl(UUID modelId, Date cutoffDate, String apiKey)
 				throws MalformedURLException, URISyntaxException {
 			String url = ApiUrlBase + "/forecast/" + modelId.toString().replace("-", "") + "?apikey="
-					+ ApiClient.ApiKey;
+					+ apiKey;
 
 			if (cutoffDate != null) {
 				url += "&asofdate=" + new SimpleDateFormat("yyyy-MM-dd").format(cutoffDate);
@@ -255,31 +255,31 @@ public class ApiClient {
 		}
 
 		@SuppressWarnings("unused")
-		public static URI forecastSummaryUrl(ForecastModel model) throws MalformedURLException, URISyntaxException {
-			return ApiUrls.forecastSummaryUrl(model.id);
+		public static URI forecastSummaryUrl(ForecastModel model, String apiKey) throws MalformedURLException, URISyntaxException {
+			return ApiUrls.forecastSummaryUrl(model.id, apiKey);
 		}
 
-		public static URI forecastSummaryUrl(UUID modelId) throws MalformedURLException, URISyntaxException {
+		public static URI forecastSummaryUrl(UUID modelId, String apiKey) throws MalformedURLException, URISyntaxException {
 			String url = ApiUrlBase + "/forecast/summary/" + modelId.toString().replace("-", "") + "?apikey="
-					+ ApiClient.ApiKey;
+					+ apiKey;
 
 			return ApiUrls.getURI(url);
 		}
 
 		@SuppressWarnings("unused")
-		public static URI seriesUrl(Indicator indicator) throws MalformedURLException, URISyntaxException {
-			return seriesUrl(indicator, null);
+		public static URI seriesUrl(Indicator indicator, String apiKey) throws MalformedURLException, URISyntaxException {
+			return seriesUrl(indicator, null, apiKey);
 		}
 
-		public static URI seriesUrl(Indicator indicator, Frequency frequency)
+		public static URI seriesUrl(Indicator indicator, Frequency frequency, String apiKey)
 				throws MalformedURLException, URISyntaxException {
-			return seriesUrl(indicator.provider.id, indicator.providerId, frequency);
+			return seriesUrl(indicator.provider.id, indicator.providerId, frequency, apiKey);
 		}
 
-		public static URI seriesUrl(UUID provider, String providerId, Frequency frequency)
+		public static URI seriesUrl(UUID provider, String providerId, Frequency frequency, String apiKey)
 				throws MalformedURLException, URISyntaxException {
 			String url = ApiUrlBase + "/indicator/series/" + provider.toString().replace("-", "") + "/" + providerId
-					+ "?apikey=" + ApiClient.ApiKey;
+					+ "?apikey=" + apiKey;
 
 			if (frequency != null) {
 				url += "&Frequency=" + frequency;
@@ -289,9 +289,9 @@ public class ApiClient {
 		}
 
 		public static URI seriesUrl(UUID provider, String providerId, Date startTime, Frequency frequency,
-				Calculation calculation, int offset) throws MalformedURLException, URISyntaxException {
+				Calculation calculation, int offset, String apiKey) throws MalformedURLException, URISyntaxException {
 			String url = ApiUrlBase + "/indicator/series/" + provider.toString().replace("-", "") + "/" + providerId
-					+ "?apikey=" + ApiClient.ApiKey;
+					+ "?apikey=" + apiKey;
 
 			if (startTime != null) {
 				url += "&StartDate=" + new SimpleDateFormat("yyyy-MM-dd").format(startTime);
@@ -310,8 +310,8 @@ public class ApiClient {
 		}
 
 		public static URI searchUrl(String query, Frequency frequency, Seasonality seasonality, boolean internalOnly,
-				boolean includeForecasted, int page, int pageSize) throws MalformedURLException, URISyntaxException {
-			String url = ApiUrlBase + "/search?query=" + query + "&apikey=" + ApiClient.ApiKey + "&internal="
+				boolean includeForecasted, int page, int pageSize, String apiKey) throws MalformedURLException, URISyntaxException {
+			String url = ApiUrlBase + "/search?query=" + query + "&apikey=" + apiKey + "&internal="
 					+ internalOnly + "&includeforecasted=" + includeForecasted + "&page=" + page + "&pageSize="
 					+ pageSize;
 

@@ -57,7 +57,7 @@ public class PrevedereConnector {
     public String testConnection(String echo) throws Exception {
     	String result = this.config.getClient().test(echo);
 		
-    	if(!ApiClient.isConnected()) {
+    	if(!this.config.getClient().isConnected()) {
 			throw new Exception("Could not connect to API.");
 		}
 		

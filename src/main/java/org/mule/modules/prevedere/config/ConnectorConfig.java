@@ -25,7 +25,7 @@ public class ConnectorConfig {
     @Default("071cf3ed952041a6a0673755988b0b6f")
     private String apiKey;
 
-    private static final ApiClient apiClient = new ApiClient();
+    private final ApiClient apiClient = new ApiClient();
     
     /**
      * Set API Key
@@ -33,8 +33,8 @@ public class ConnectorConfig {
      * @param apiKey An API Key
      */
     public void setApiKey(String apiKey) {
-    	ApiClient.setApiKey(apiKey);
-        this.apiKey = apiKey;
+    	this.apiClient.setApiKey(apiKey);
+    	this.apiKey = apiKey;
     }
 
     /**
