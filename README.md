@@ -14,7 +14,7 @@ For released connectors you can download them from the update site in Anypoint S
 Open Anypoint Studio, go to Help → Install New Software and select Anypoint Connectors Update Site where you will find all available connectors.
 
 #Usage
-For information about usage our documentation at https://github.com/Prevedere/Prevedere-Connector
+For information about usage our documentation at https://github.com/Prevedere/Prevedere-Connector/doc/user-guide/user-guide.adoc
 
 # Reporting Issues
 
