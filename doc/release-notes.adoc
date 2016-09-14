@@ -1,7 +1,0 @@
-Prevedere MuleSoft Connector  v1.0.0
-----------------------------------------
-- Initial release
-- Features include: 
-    - Ability to query Prevedere's public Economic Indicator Repository
-    - Access to Prevedere's public Economic Forecast for specific industries
-    - Subscribed clients can access internal Economic Indicator Repository, Economic FOrecasts and premium data
