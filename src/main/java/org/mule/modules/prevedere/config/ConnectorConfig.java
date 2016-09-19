@@ -39,11 +39,18 @@ public class ConnectorConfig {
 
     /**
      * Get API Key
-     */
+     * 
+     * @return the current API Key
+     */    
     public String getApiKey() {
         return this.apiKey;
     }    
     
+    /**
+     * Get Prevedere API Client
+     * 
+     * @return an instance of the Prevedere API Client
+     */
     public ApiClient getClient() {
     	return apiClient;
     }
