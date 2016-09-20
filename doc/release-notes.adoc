@@ -4,7 +4,7 @@
 
 The Prevedere MuleSoft Connector can be utilized to access Prevedere's external global economic indicator repository as well as Prevedere's leading industry forecasts.  Current customers can access their internal indicators and models using their own Prevedere API key.  
 
-link:../user-guide/user-guide.adoc[Prevedere Connector User Guide]
+link:./user-manual.adoc[Prevedere Connector User Guide]
 
 == v1.0.0 - September, 30th 2016
 

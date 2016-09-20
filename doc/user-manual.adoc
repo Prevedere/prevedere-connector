@@ -22,7 +22,7 @@ toc::[]
 
 The Prevedere Connector can be utilized to access Prevedere's external global economic indicator repository as well as Prevedere's leading industry forecasts.  Current customers can access their internal indicators and models using their own Prevedere API key.  
 
-Read through this user guide to understand how to set up and configure a basic flow using the connector. Track feature additions, compatibility, limitations and API version updates with each release of the connector using the link:../release-notes/release-notes.adoc[Prevedere Connector Release Notes]. Review the connector operations and functionality using the link:https://github.com/Prevedere/prevedere-connector[ Technical Reference] alongside the link:https://www.mulesoft.com/exchange#!/?filters=Prevedere&sortBy=rank[demo applications].
+Read through this user guide to understand how to set up and configure a basic flow using the connector. Track feature additions, compatibility, limitations and API version updates with each release of the connector using the link:./release-notes.adoc[Prevedere Connector Release Notes]. Review the connector operations and functionality using the link:https://github.com/Prevedere/prevedere-connector[ Technical Reference] alongside the link:https://www.mulesoft.com/exchange#!/?filters=Prevedere&sortBy=rank[demo applications].
 
 == Prerequisites
 
@@ -273,4 +273,4 @@ For background information on pooling, see link:/mule-user-guide/v/3.8/tuning-pe
 
 * link:http://prevedere.com[Prevedere]
 * email: support@prevedere.com
-* Access the link:../release-notes/release-notes.adoc[Prevedere Connector Release Notes].
+* Access the link:./release-notes.adoc[Prevedere Connector Release Notes].
