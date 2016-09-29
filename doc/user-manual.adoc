@@ -1,0 +1,275 @@
+////
+The following is the approved connector user guide template for documenting MuleSoft Supported Connectors.
+////
+
+= Prevedere Connector
+:keywords: prevedere,finance,financial,forecast,forecasting,model,modeling,economic,econometric
+:imagesdir: ./_images
+:toc: macro
+:toclevels: 2
+////
+Image names follow "image:". Identify images using the connector name, preferably without the word "connector"
+URLs should always follow "link:"
+////
+
+// Dropdown for Connector Version
+//  Children: Technical Reference / Demos
+
+toc::[]
+
+
+== Introduction
+
+The Prevedere Connector can be utilized to access Prevedere's external global economic indicator repository as well as Prevedere's leading industry forecasts.  Current customers can access their internal indicators and models using their own Prevedere API key.  
+
+Read through this user guide to understand how to set up and configure a basic flow using the connector. Track feature additions, compatibility, limitations and API version updates with each release of the connector using the link:./release-notes.adoc[Prevedere Connector Release Notes]. Review the connector operations and functionality using the link:https://github.com/Prevedere/prevedere-connector[ Technical Reference] alongside the link:https://www.mulesoft.com/exchange#!/?filters=Prevedere&sortBy=rank[demo applications].
+
+== Prerequisites
+
+This document assumes that you are familiar with Mule,
+link:/mule-user-guide/v/3.8/anypoint-connectors[Anypoint Connectors], and
+link:/mule-fundamentals/v/3.8/anypoint-studio-essentials[Anypoint Studio Essentials]. To increase your familiarity with Studio, consider completing a link:/mule-fundamentals/v/3.8/basic-studio-tutorial[Anypoint Studio Tutorial]. This page requires some basic knowledge of link:/mule-fundamentals/v/3.8/mule-concepts[Mule Concepts], link:/mule-fundamentals/v/3.8/elements-in-a-mule-flow[Elements in a Mule Flow], and link:/mule-fundamentals/v/3.8/global-elements[Global Elements].
+
+
+[[requirements]]
+=== Hardware and Software Requirements
+
+For hardware and software requirements, please visit the link:/mule-user-guide/v/3.8/hardware-and-software-requirements[Hardware and Software Requirements] page.
+
+
+
+=== Compatibility
+
+*Versions* +
+
+Anypoint Studio 6.1 +
+Mule Server 3.8.1 EE +
+Java Development Kit 1.7 +
+
+== Installing the Connector
+
+You can install the connector in Anypoint Studio using the instructions in
+link:/mule-fundamentals/v/3.8/anypoint-exchange#installing-a-connector-from-anypoint-exchange[Installing a Connector from Anypoint Exchange].
+
+=== Upgrading from an Older Version
+
+If you’re currently using an older version of the connector, a small popup appears in the bottom right corner of Anypoint Studio with an "Updates Available" message.
+
+. Click the popup and check for available updates. 
+. Click the Connector version checkbox and click *Next* and follow the instructions provided by the user interface. 
+. *Restart* Studio when prompted. 
+. After restarting, when creating a flow and using the connector, if you have several versions of the connector installed, you may be asked which version you would like to use. Choose the version you would like to use.
+
+Additionally, we recommend that you keep Studio up to date with its latest version.
+
+== Configuring the Connector Global Element
+
+To use the Prevedere Connector in your Mule application, you must configure a global Prevedere:Configuration element that can be used by the Prevedere Connector (read more about  link:/mule-fundamentals/v/3.8/global-elements[Global Elements]). The Prevedere Connector offers the following global configuration(s), requiring the following credentials: *API Key*
+
+[width="100a",cols="50a,50a",options="header",]
+|===
+|Field |Description
+|*API Key* |Enter the API key associated with your account or use default demo id provided.
+
+|===
+
+== Using the Connector
+
+Outbound, inbound, streaming outbound  +
+
+[NOTE]
+See a full list of operations for any version of the connector link:[here].
+
+=== Connector Namespace and Schema
+
+When designing your application in Studio, the act of dragging the connector from the palette onto the Anypoint Studio canvas should automatically populate the XML code with the connector *namespace* and *schema location*.
+
+*Namespace:* `http://www.mulesoft.org/schema/mule/prevedere`
+*Schema Location:* `http://www.mulesoft.org/schema/mule/prevedere/current/mule-prevedere.xsd`
+
+[TIP]
+If you are manually coding the Mule application in Studio's XML editor or other text editor, define the namespace and schema location in the header of your *Configuration XML*, inside the `<mule>` tag.
+
+[source, xml,linenums]
+----
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:connector="http://www.mulesoft.org/schema/mule/connector"
+      xsi:schemaLocation="
+               http://www.mulesoft.org/schema/mule/core
+               http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/prevedere
+               http://www.mulesoft.org/schema/mule/prevedere/current/mule-prevedere.xsd">
+
+      <!-- put your global configuration elements and flows here -->
+
+</mule>
+----
+
+
+=== Using the Connector in a Mavenized Mule App
+
+If you are coding a Mavenized Mule application, this XML snippet must be included in your `pom.xml` file.
+
+[source,xml,linenums]
+----
+<dependency>
+	<groupId>org.mule.modules</groupId>
+	<artifactId>prevedere-java-connector</artifactId>
+	<version>1.0.0</version>
+</dependency>
+----
+
+[TIP]
+====
+Inside the `<version>` tags, put the desired version number, the word `RELEASE` for the latest release, or `SNAPSHOT` for the latest available version. The available versions to date are:
+
+* 1.0.0
+====
+
+
+== Demo Mule Applications Using Connector
+
+The Prevedere Connector Demo Application creates a number of HTTP endpoints to demonstrate every function of the Prevedere Connector.  All required parameters will appear as uri parameters, whereas all optional parameters will be query params.  To deploy the demo project, follow the instructions below:
+
+=== Setup and Deploy
+1.	Download and extract the source code for the connector.
+2.	Open Anypoint Studio.
+3.	Select File -> Import.  On the Import screen, open the Anypoint Studio folder and select ‘Anypoint Studio Project from External Location’.  Click ‘Next’.
+4.	In the Mule Import dialog, select the browse button next to the ‘Project Root:’ input in the External Project section.  Browse to the directory where you extracted the Prevedere Connector source and then navigate to ‘\demo\prevedere-connector-examples’.  Click ‘OK’.  Click ‘Finish’.
+5.	Right click on the imported project and select ‘Run As’ -> ‘Mule Application’.  The project should build successfully and deploy automatically.
+
+=== Endpoints
+All available endpoints are located at http://localhost:8081 by default.
+
+==== Prevedere Global Indicator Repository
+Prevedere collects over 2 million economic indicators that can be used to generate economic models and forecasts. The indicator repository is available to search against and retrieve data for analysis.
+
+===== Search
+Search the global repository for indicator information.  Use this information to retrieve associated indicator data points.
+
+Endpoint: /indicators/{query}/
+
+* Query: The text to perform a search for against.
+* Frequency: _<optional>_ Filter results to specified frequency.  Options are [Daily, Weekly, BiWeekly, Monthly, Quarterly, SemiAnnual, Annual].
+* Seasonality: _<optional>_ Filter results to specified seasonality. Options are [SeasonallyAdjusted, NotSeasonallyAdjusted].
+* Internal Only: _<optional>_ Flag to determine if only internal indicators should be returned.
+
+	
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-indicators">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/indicators/{query}/" allowedMethods="GET" doc:name="HTTP"/>
+	<prevedere:search-indicators config-ref="Prevedere__Configuration" query="#[message.inboundProperties.'http.uri.params'.query]" frequency="#[message.inboundProperties.'http.query.params'.frequency]" seasonality="#[message.inboundProperties.'http.query.params'.seasonality]" internalOnly="#[message.inboundProperties.'http.query.params'.internal]" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+==== Retrieve Data
+Retrieve data points for a specific indicator.
+
+Endpoint: /indicator/{provider}/{providerid}
+
+* Provider: The UUID of the provider associated with the desired indicator.
+* ProviderId: The ID associated with the desired indicator.
+* Start: _<optional>_ Date to start retrieving data.
+* Offset: _<optional>_ Number of periods to shift the data.
+* Calculation: _<optional>_ Calculation to apply to the data.  Options are [None, PeriodOverPeriod, YearOverYear, ThreePeriodMoving, FivePeriodMoving, ThreePeriodYearOverYear].
+* Frequency: _<optional>_ Filter results to specified frequency.  Options are [Daily, Weekly, BiWeekly, Monthly, Quarterly, SemiAnnual, Annual].
+
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-indicator">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/indicator/{provider}/{providerid}" doc:name="HTTP"/>
+	<prevedere:get-indicator-data config-ref="Prevedere__Configuration" provider="#[message.inboundProperties.'http.uri.params'.provider]" providerId="#[message.inboundProperties.'http.uri.params'.providerid]" start="#[message.inboundProperties.'http.query.params'.start]" offset="#[message.inboundProperties.'http.query.params'.offset]" calculation="#[message.inboundProperties.'http.query.params'.calculation]" frequency="#[message.inboundProperties.'http.query.params'.frequency]" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+=== Prevedere Forecast Modeling
+Forecast models are built using Prevedere's economic indicator repository and can also include a company's internal data. Depending on the strength of the relationships between the forecasted values and the indicators, these models can be extremely accurate at predicting future performance.
+
+==== List Available Models
+Retrieve a list of all available forecast models for the given configuration.
+
+Endpoint: /models
+
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-forecastmodels">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/models" doc:name="HTTP"/>
+	<prevedere:get-forecast-models config-ref="Prevedere__Configuration" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+==== Retrieve Model Data
+Retrieve a list of forecasted data points.
+
+Endpoint: /model/{model id}
+
+* Model Id: The UUID of the model to retrieve data for.
+* Cutoff: _<optional>_ The last date to use actual values as inputs to the forecast.  Useful for back testing a model.
+
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-model">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/model/{id}" doc:name="HTTP"/>
+	<prevedere:get-forecast-model-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" cutoff="#[message.inboundProperties.'http.query.params'.cutoff]" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+==== Retrieve Component Informtion
+Retrieve a list of actual values for a forecast models components.  Also includes relevent statistical information.
+
+Endpoint: /raw/{model id}
+
+* Model Id: The UUID of the model to retrieve data for.
+* Cutoff: _<optional>_ The end date for the forecast.  Useful for back testing a model.
+* UseForecastFrequency: _<optional>_ Flag indicating whether to convert all component output to the frequency of the forecast model.
+	
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-rawmodel">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/raw/{id}" doc:name="HTTP"/>
+	<prevedere:get-raw-model-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" cutoff="#[message.inboundProperties.'http.query.params'.cutoff]" useForecastFrequency="#[message.inboundProperties.'http.query.params'.useforecastfrequency]" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+==== Retrieve Summary Information
+Retrieve High, Average and Low forecasts for a forecast model.
+
+Endpoint: /summary/{model id}
+
+* Model Id: The UUID of the model to retrieve data for.
+* Cutoff: _<optional>_ The end date for the forecast.  Useful for back testing a model.
+
+[source,xml,linenums]
+----
+<flow name="prevedere-connector-model-summary">
+	<http:listener config-ref="HTTP_Listener_Configuration" path="/summary/{id}" doc:name="HTTP"/>
+	<prevedere:get-forecast-summary-data config-ref="Prevedere__Configuration" modelId="#[message.inboundProperties.'http.uri.params'.id]" doc:name="Prevedere"/>
+	<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+	<json:object-to-json-transformer doc:name="Object to JSON"/>
+</flow>
+----
+
+== Connector Performance
+
+To define the pooling profile for the connector manually, access the *Pooling Profile* tab in the applicable global element for the connector.
+
+For background information on pooling, see link:/mule-user-guide/v/3.8/tuning-performance[Tuning Performance].
+
+
+== Resources
+
+* link:http://prevedere.com[Prevedere]
+* email: support@prevedere.com
+* Access the link:./release-notes.adoc[Prevedere Connector Release Notes].

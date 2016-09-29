@@ -1,0 +1,45 @@
+= Prevedere Connector Release Notes
+:keywords: prevedere,finance,financial,forecast,forecasting,model,modeling,economic,econometric
+
+
+The Prevedere MuleSoft Connector can be utilized to access Prevedere's external global economic indicator repository as well as Prevedere's leading industry forecasts.  Current customers can access their internal indicators and models using their own Prevedere API key.  
+
+link:./user-manual.adoc[Prevedere Connector User Guide]
+
+== v1.0.0 - September, 30th 2016
+
+=== Version 1.0.0 Compatibility
+
+[width="100%", cols=",", options="header"]
+|===
+|Software |Version
+|Mule Runtime |3.8.1
+|Java |1.7
+|Prevedere API |1.0.0
+|===
+
+=== Migrating from Older Versions
+
+Not Applicable
+
+=== Features
+. Indicator Search - Search Prevedere's global repository for indicator information.
+. Indicator Data - List of indicator data points.
+
+. Forecast Model List - List of all available forecast models.
+. Forecast Model Data - List of forecasted data points.
+. Forecast Model Component Information - List of actual values for a forecast model's components.  Also includes relevent statistical information.
+. Forecast Model Component Information - High, Average and Low forecasts for a forecast model.
+
+=== v1.0.0 Fixed in this Release
+
+Not Applicable
+
+=== v1.0.0 Known Issues
+
+None
+
+=== Support Resources
+* Learn how to link:/mule-user-guide/v/3.7/installing-connectors[Install Anypoint Connectors] using Anypoint Exchange.
+* Access MuleSoft’s MuleForge link:http://forum.mulesoft.org/mulesoft[Forum] to pose questions and get help from Mule’s broad community of users.
+* To access MuleSoft’s expert support team, link:http://www.mulesoft.com/mule-esb-subscription[subscribe] to Mule ESB Enterprise and log in to MuleSoft’s link:http://www.mulesoft.com/support-login[Customer Portal].
