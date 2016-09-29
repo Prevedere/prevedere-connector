@@ -17,6 +17,7 @@ import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.licensing.RequiresEnterpriseLicense;
+import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.prevedere.config.ConnectorConfig;
 import org.mule.modules.prevedere.model.Calculation;
@@ -94,7 +95,7 @@ public class PrevedereConnector {
      * 			if API key is invalid
 	 */
     @Processor(friendlyName="Search Indicators")
-    public List<Indicator> searchIndicators(String query, @Optional Boolean internalOnly, @Optional Frequency frequency, @Optional Seasonality seasonality) throws Exception {
+    public List<Indicator> searchIndicators(@Default("#[payload]")String query, @Optional Boolean internalOnly, @Optional Frequency frequency, @Optional Seasonality seasonality) throws Exception {
 		Frequency searchFrequency = frequency != null ? frequency : Frequency.Default;
 		Seasonality searchseasonality = seasonality != null ? seasonality : Seasonality.Default;
     	
@@ -128,7 +129,7 @@ public class PrevedereConnector {
      * 			if API key is invalid
 	 */    
     @Processor(friendlyName="Get Indicator Data")
-    public List<Point> getIndicatorData(String provider, String providerId, @Optional Date start, @Optional Frequency frequency, @Optional Calculation calculation, @Optional Integer offset) throws Exception {
+    public List<Point> getIndicatorData(@Default("#[payload]")String provider, String providerId, @Optional Date start, @Optional Frequency frequency, @Optional Calculation calculation, @Optional Integer offset) throws Exception {
     	//some stupid java stuff here
     	int indicatorOffset = offset != null ? offset : new Integer(0);
 		
@@ -148,7 +149,7 @@ public class PrevedereConnector {
      * 			if API key is invalid
 	 */
     @Processor(friendlyName="Get Forecast Model Data")
-    public List<Point> getForecastModelData(String modelId, @Optional Date cutoff) throws Exception {
+    public List<Point> getForecastModelData(@Default("#[payload]")String modelId, @Optional Date cutoff) throws Exception {
     	return this.config.getClient().getModelForecast(getUUID(modelId), cutoff);
     }
     
@@ -167,7 +168,7 @@ public class PrevedereConnector {
      * 			if API key is invalid
 	 */
     @Processor(friendlyName="Get Raw Model Data")
-    public RawModel getRawModelData(String modelId, @Optional Boolean useForecastFrequency, @Optional Date cutoff) throws Exception {
+    public RawModel getRawModelData(@Default("#[payload]")String modelId, @Optional Boolean useForecastFrequency, @Optional Date cutoff) throws Exception {
     	boolean shouldUseForecastFrequency = useForecastFrequency != null ? useForecastFrequency : false;
     	
     	return this.config.getClient().getRawModel(getUUID(modelId), shouldUseForecastFrequency, cutoff);
