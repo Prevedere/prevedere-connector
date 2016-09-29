@@ -135,10 +135,9 @@ The Prevedere Connector Demo Application creates a number of HTTP endpoints to d
 === Setup and Deploy
 1.	Download and extract the source code for the connector.
 2.	Open Anypoint Studio.
-3.	Select File -> Import.  On the Import screen, open the Anypoint Studio folder and select ‘Maven-based Mule Project from pom.xml’.  Click ‘Next’.
-4.	In the Maven-based Mule Project Import dialog, select the browse button next to the ‘POM File:’ input in the Maven Settings section.  Browse to the directory where you extracted the Prevedere Connector source and then navigate to ‘\demo\prevedere-connector-examples’.  Select pom.xml and click ‘OK’.  Click ‘Finish’.
-5.	Right click on the imported project and select ‘Convert to Anypoint Studio Project’. 
-6.	Right click on the imported project and select ‘Run As’ -> ‘Mule Application with Maven’.  The project should build successfully and deploy automatically.
+3.	Select File -> Import.  On the Import screen, open the Anypoint Studio folder and select ‘Anypoint Studio Project from External Location’.  Click ‘Next’.
+4.	In the Mule Import dialog, select the browse button next to the ‘Project Root:’ input in the External Project section.  Browse to the directory where you extracted the Prevedere Connector source and then navigate to ‘\demo\prevedere-connector-examples’.  Click ‘OK’.  Click ‘Finish’.
+5.	Right click on the imported project and select ‘Run As’ -> ‘Mule Application’.  The project should build successfully and deploy automatically.
 
 === Endpoints
 All available endpoints are located at http://localhost:8081 by default.

@@ -14,17 +14,15 @@ Prevedere API v1.0.0
 
 1.	Download and extract the source code for the connector.
 2.	Open Anypoint Studio.
-3.	Select File -> Import.  On the Import screen, open the Anypoint Studio folder and select ‘Maven-based Mule Project from pom.xml’.  Click ‘Next’.
-4.	In the Maven-based Mule Project Import dialog, select the browse button next to the ‘POM File:’ input in the Maven Settings section.  Browse to the directory where you extracted the Prevedere Connector source and then navigate to ‘\demo\prevedere-connector-examples’.  Select pom.xml and click ‘OK’.  Click ‘Finish’.
-5.	Right click on the imported project and select ‘Convert to Anypoint Studio Project’. 
-6.	Right click on the imported project and select ‘Run As’ -> ‘Mule Application with Maven’.  The project should build successfully and deploy automatically.
+3.	Select File -> Import.  On the Import screen, open the Anypoint Studio folder and select ‘Anypoint Studio Project from External Location’.  Click ‘Next’.
+4.	In the Mule Import dialog, select the browse button next to the ‘Project Root:’ input in the External Project section.  Browse to the directory where you extracted the Prevedere Connector source and then navigate to ‘\demo\prevedere-connector-examples’.  Click ‘OK’.  Click ‘Finish’.
+5.	Right click on the imported project and select ‘Run As’ -> ‘Mule Application’.  The project should build successfully and deploy automatically.
 
 #Usage
 
-Endpoints
 All available endpoints are located at http://localhost:8081 by default.
 
-**Prevedere Global Indicator Repository**
+##Prevedere Global Indicator Repository
 Prevedere collects over 2 million economic indicators that can be used to generate economic models and forecasts. The indicator repository is available to search against and retrieve data for analysis.
 
 **Search**
@@ -49,7 +47,7 @@ Endpoint: /indicator/{provider}/{providerid}
 * Calculation: _<optional>_ Calculation to apply to the data.
 * Frequency: _<optional>_ Filter results to specified frequency.
 
-**Prevedere Forecast Modeling**
+##Prevedere Forecast Modeling
 Forecast models are built using Prevedere's economic indicator repository and can also include a company's internal data. Depending on the strength of the relationships between the forecasted values and the indicators, these models can be extremely accurate at predicting future performance.
 
 **List Available Models**
