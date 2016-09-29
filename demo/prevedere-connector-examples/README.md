@@ -80,7 +80,7 @@ Endpoint: /summary/{model id}
 * Model Id: The UUID of the model to retrieve data for.
 * Cutoff: _<optional>_ The end date for the forecast.  Useful for back testing a model.
 
-For more information about usage our documentation at https://github.com/Prevedere/Prevedere-Connector/doc/user-manual.adoc
+For more information about usage please read our documentation in /prevedere-connector/doc/user-manual.adoc
 
 # Reporting Issues
 
