@@ -13,13 +13,13 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.mule.modules.prevedere.automation.functional.ConnectionTestCases;
 import org.mule.modules.prevedere.automation.functional.GetForecastModelDataTestCases;
 import org.mule.modules.prevedere.automation.functional.GetForecastModelsTestCases;
 import org.mule.modules.prevedere.automation.functional.GetForecastSummaryDataTestCases;
 import org.mule.modules.prevedere.automation.functional.GetIndicatorDataTestCases;
 import org.mule.modules.prevedere.automation.functional.GetRawModelDataTestCases;
 import org.mule.modules.prevedere.automation.functional.SearchIndicatorsTestCases;
-import org.mule.modules.prevedere.automation.functional.TestConnectionTestCases;
 import org.mule.modules.prevedere.PrevedereConnector;
 import org.mule.tools.devkit.ctf.exceptions.ConfigurationLoadingFailedException;
 import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
@@ -33,7 +33,7 @@ import org.mule.tools.devkit.ctf.platform.PlatformManager;
 	GetIndicatorDataTestCases.class, 
 	GetRawModelDataTestCases.class,
 	SearchIndicatorsTestCases.class, 
-	TestConnectionTestCases.class })
+	ConnectionTestCases.class })
 public class FunctionalTestSuite {
 
 	@BeforeClass

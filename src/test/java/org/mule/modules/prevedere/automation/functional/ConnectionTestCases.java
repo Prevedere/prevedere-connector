@@ -15,9 +15,9 @@ import org.junit.Test;
 import org.mule.modules.prevedere.PrevedereConnector;
 import org.mule.tools.devkit.ctf.junit.AbstractTestCase;
 
-public class TestConnectionTestCases extends AbstractTestCase<PrevedereConnector> {
+public class ConnectionTestCases extends AbstractTestCase<PrevedereConnector> {
 
-	public TestConnectionTestCases() {
+	public ConnectionTestCases() {
 		super(PrevedereConnector.class);
 	}
 
