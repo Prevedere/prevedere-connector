@@ -21,8 +21,9 @@ local.properties
 .settings/
 .loadpath
 # You may want to remove the sharp symbols here if you are using Maven
-#.project
-#.classpath
+.project
+.classpath
+.factorypath
 # External tool builders
 .externalToolBuilders/
 # Locally stored "Eclipse launch configurations"
@@ -38,3 +39,5 @@ local.properties
 flows/
 target/
 **/*.mflow
+*.mule
+studio_id.xml
