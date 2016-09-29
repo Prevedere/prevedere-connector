@@ -151,8 +151,8 @@ Search the global repository for indicator information.  Use this information to
 Endpoint: /indicators/{query}/
 
 * Query: The text to perform a search for against.
-* Frequency: _<optional>_ Filter results to specified frequency.
-* Seasonality: _<optional>_ Filter results to specified seasonality.
+* Frequency: _<optional>_ Filter results to specified frequency.  Options are [Daily, Weekly, BiWeekly, Monthly, Quarterly, SemiAnnual, Annual].
+* Seasonality: _<optional>_ Filter results to specified seasonality. Options are [SeasonallyAdjusted, NotSeasonallyAdjusted].
 * Internal Only: _<optional>_ Flag to determine if only internal indicators should be returned.
 
 	
@@ -175,8 +175,8 @@ Endpoint: /indicator/{provider}/{providerid}
 * ProviderId: The ID associated with the desired indicator.
 * Start: _<optional>_ Date to start retrieving data.
 * Offset: _<optional>_ Number of periods to shift the data.
-* Calculation: _<optional>_ Calculation to apply to the data.
-* Frequency: _<optional>_ Filter results to specified frequency.
+* Calculation: _<optional>_ Calculation to apply to the data.  Options are [None, PeriodOverPeriod, YearOverYear, ThreePeriodMoving, FivePeriodMoving, ThreePeriodYearOverYear].
+* Frequency: _<optional>_ Filter results to specified frequency.  Options are [Daily, Weekly, BiWeekly, Monthly, Quarterly, SemiAnnual, Annual].
 
 [source,xml,linenums]
 ----
