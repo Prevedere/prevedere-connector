@@ -1,7 +1,7 @@
 # Prevedere Anypoint Connector
 The Prevedere Connector can be utilized to access Prevedere's external global economic indicator repository as well as Prevedere's leading industry forecasts.  Current customers can access their internal indicators and models using their own Prevedere API key.  
 
-Read through this user guide to understand how to set up and configure a basic flow using the connector. Track feature additions, compatibility, limitations and API version updates with each release of the connector using the [Prevedere Connector Release Notes](https://github.com/Prevedere/prevedere-connector/blob/master/prevedere-connector/doc/release-notes.adoc). Review the connector operations and functionality using the [Technical Reference](https://github.com/Prevedere/prevedere-connector) alongside the [Demo Applications](https://www.mulesoft.com/exchange#!/?filters=Prevedere&sortBy=rank).
+Read through this user guide to understand how to set up and configure a basic flow using the connector. Track feature additions, compatibility, limitations and API version updates with each release of the connector using the [Prevedere Connector Release Notes](https://github.com/Prevedere/prevedere-connector/blob/master/doc/release-notes.adoc). Review the connector operations and functionality using the [Technical Reference](https://github.com/Prevedere/prevedere-connector) alongside the [Demo Applications](https://www.mulesoft.com/exchange#!/?filters=Prevedere&sortBy=rank).
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ If you are coding a Mavenized Mule application, this XML snippet must be include
 Inside the `<version>` tags, put the desired version number, the word `RELEASE` for the latest release, or `SNAPSHOT` for the latest available version. The available versions to date are:
 
 ## Usage
-For more information about usage visit our documentation at [Prevedere User Manual](https://github.com/Prevedere/prevedere-connector/blob/master/prevedere-connector/doc/user-manual.adoc)
+For more information about usage visit our documentation at [Prevedere User Manual](https://github.com/Prevedere/prevedere-connector/blob/master/doc/user-manual.adoc)
 
 ## Reporting Issues
 
