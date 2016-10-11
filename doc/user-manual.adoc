@@ -75,11 +75,6 @@ To use the Prevedere Connector in your Mule application, you must configure a gl
 
 == Using the Connector
 
-Outbound, inbound, streaming outbound  +
-
-[NOTE]
-See a full list of operations for any version of the connector link:[here].
-
 === Connector Namespace and Schema
 
 When designing your application in Studio, the act of dragging the connector from the palette onto the Anypoint Studio canvas should automatically populate the XML code with the connector *namespace* and *schema location*.
